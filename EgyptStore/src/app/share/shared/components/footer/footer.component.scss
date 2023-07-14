@@ -1,0 +1,28 @@
+#footer {
+    background: #073839;
+    padding: 30px 0;
+    color: #fff;
+    font-size: 14px;
+}
+
+#footer .copyright {
+    text-align: center;
+}
+
+#footer .credits {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+
+    a {
+        font-size: 1.3rem;
+        padding: 10px;
+
+        i {
+            font-size: 1.3rem;
+            padding: 10px;
+        }
+    }
+
+}

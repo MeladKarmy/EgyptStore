@@ -11,6 +11,11 @@ const commentsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         require: [true, "user ID is Require"]
+    },
+    text: {
+        type: String,
+        trim: true,
+        require: [true, "Comment is Require"]
     }
 
 }, { id: false })
@@ -89,7 +94,7 @@ const proudctsSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        min: [1, "rating min"],
+        minl: [1, "rating min"],
         max: [5, "rating max 5 "]
     },
     usersRating: {
@@ -97,7 +102,7 @@ const proudctsSchema = new mongoose.Schema({
         default: 0
     },
     comments: {
-        type: commentsSchema,
+        type: [commentsSchema],
     }
 }, { timestamps: true })
 

@@ -27,8 +27,8 @@ exports.createProudctValidation =
         body('images').notEmpty().isArray().withMessage('Image Proudct is Require'),
         body('solid').optional().isNumeric().withMessage('solid is Number'),
         body('stock').isNumeric().notEmpty().withMessage('stock is Require & Number'),
-        body('statusStock').isBoolean().notEmpty().withMessage('statusStock is Require & Number'),
-        body('rating').isObject().optional(),
+        body('statusStock').isBoolean().notEmpty().withMessage('statusStock is Require boolean'),
+        body('rating').isNumeric().optional(),
         body('usersRating').isNumeric().default().optional(),
         body('comments').isObject().optional(),
         error

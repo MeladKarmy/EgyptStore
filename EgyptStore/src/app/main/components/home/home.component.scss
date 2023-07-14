@@ -1,0 +1,199 @@
+#hero {
+    width: 100%;
+    height: 75vh;
+    background: url("../../../../assets/images/dress-shirt-img.png") top center;
+    background-size: cover;
+    position: relative;
+    margin-bottom: -80px;
+
+    &:before {
+        content: "";
+        background: rgba(112, 185, 176, 0.85);
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .hero-container {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        padding-top: 80px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 48px;
+            font-weight: 300;
+            line-height: 56px;
+            color: #fff;
+
+            @media (max-width: 768px) {
+                font-size: 28px;
+                line-height: 36px;
+            }
+
+
+        }
+
+        h2 {
+            color: #eee;
+            margin-bottom: 50px;
+            font-size: 20px;
+            font-weight: 300;
+
+            @media (max-width: 768px) {
+                font-size: 18px;
+                line-height: 24px;
+                margin-bottom: 30px;
+            }
+        }
+
+        .btn-get-started {
+            font-family: "Lato", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 8px 28px 10px 28px;
+            border-radius: 50px;
+            transition: 0.5s;
+            border: 1px solid #fff;
+            color: #fff;
+
+            &:hover {
+                background: #fff;
+                color: #70b9b0;
+                border: 1px solid #70b9b0;
+            }
+
+        }
+
+    }
+
+}
+
+#main {
+    #portfolio {
+        padding: 60px 0;
+
+        #portfolio-flters {
+            padding: 0;
+            margin: 0 0 35px 0;
+            list-style: none;
+            text-align: center;
+
+            li {
+                cursor: pointer;
+                margin: 0 15px 15px 0;
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 12px;
+                line-height: 20px;
+                color: #777;
+                border-radius: 4px;
+                text-transform: uppercase;
+                background: white;
+                margin-bottom: 5px;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    background: #70b9b0;
+                    color: #fff;
+                }
+
+                i:hover {
+                    color: #70b9b0;
+                }
+
+            }
+        }
+    }
+}
+
+.portfolio {
+    padding: 60px 0;
+}
+
+.portfolio #portfolio-flters {
+    padding: 0;
+    margin: 0 0 35px 0;
+    list-style: none;
+    text-align: center;
+}
+
+.portfolio #portfolio-flters li {
+    cursor: pointer;
+    margin: 0 15px 15px 0;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777;
+    border-radius: 4px;
+    text-transform: uppercase;
+    background: white;
+    margin-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio #portfolio-flters li:hover,
+.portfolio #portfolio-flters li.filter-active {
+    background: #70b9b0;
+    color: #fff;
+}
+
+.portfolio #portfolio-flters li:last-child {
+    margin-right: 0;
+}
+
+.portfolio .portfolio-wrap {
+    background: #073839;
+    overflow: hidden;
+    min-height: 200px;
+    position: relative;
+    border-radius: 4px;
+    margin: 0 0 30px 0;
+}
+
+.portfolio .portfolio-wrap img {
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio .portfolio-wrap .portfolio-info {
+    opacity: 0;
+    position: absolute;
+    transition: all 0.3s linear;
+    text-align: center;
+    top: 10%;
+    left: 0;
+    right: 0;
+}
+
+.portfolio .portfolio-wrap .portfolio-info h3 {
+    font-size: 22px;
+}
+
+.portfolio .portfolio-wrap .portfolio-info h3 a {
+    color: #fff;
+    font-weight: bold;
+}
+
+.portfolio .portfolio-wrap .portfolio-info a i {
+    color: #fff;
+    font-size: 24px;
+    transition: 0.3s;
+    margin: 4px;
+}
+
+.portfolio .portfolio-wrap .portfolio-info a i:hover {
+    color: #70b9b0;
+}

@@ -1,0 +1,86 @@
+<section id="about" class=" mt-5">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Us</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img [src]="ImgAbout" class="img-fluid" alt="About">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1">
+          <h3>{{titleAbout}}</h3>
+          <p class="fst-italic">{{textTitleAbout}}</p>
+          <ul>
+            <li *ngFor="let adv of advantge.icon"><i [class]="adv.icon" ></i>{{adv.text}}</li>
+          </ul>
+          <p>{{description}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section id="services" class="services section-bg">
+    <div class="container">
+      <div class="section-title">
+        <h2>{{sectionTwo}}</h2>
+        <p>{{textSectionTwo}}</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 icon-box" *ngFor="let advantge of advantgeSectionTwo.advantge">
+          <div class="icon"><i [class]="advantge.icon"></i></div>
+          <h4 class="title"><a routerLink="#" style="pointer-events: none">{{advantge.text}}</a></h4>
+          <p class="description">{{advantge.desc}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="call-to-action">
+    <div class="container">
+      <div class="text-center">
+        <h3>Go Shopping now and Get Discount </h3>
+        <p>Looking to upgrade your technology?.
+          Our selection of high-quality products is perfect for anyone looking to take their tech experience to the next level.
+          From smartphones and laptops to tablets and more, we have everything you need to stay connected and productive.
+          And with our exclusive deals and limited time offers,Shop now and get discount on your purchase!</p>
+        <a class="cta-btn" routerLink="/proudct">GO Shopping</a>
+      </div>
+    </div>
+  </section>
+  <section id="faq" class="faq section-bg">
+    <div class="container">
+      <div class="section-title">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+
+  <cdk-accordion class=" ">
+    <cdk-accordion-item
+      *ngFor="let item of question.qestion; let index = index;"
+      #accordionItem="cdkAccordionItem"
+      class="faq section-bg "
+      role="button"
+      tabindex="0"
+      [attr.id]="'accordion-header-' + index"
+      [attr.aria-expanded]="accordionItem.expanded"
+      [attr.aria-controls]="'accordion-body-' + index">
+      <div class="example-accordion-item-header collapsed question" (click)="accordionItem.toggle()">
+        {{ item.q }}
+
+        <i class="fa-solid fa-arrow-down" style=" font-size: .7rem;" *ngIf="!accordionItem.expanded"></i>
+      </div>
+      <div
+        class="example-accordion-item-body "
+        role="region"
+        [style.display]="accordionItem.expanded ? '' : 'none'"
+        [attr.id]="'accordion-body-' + index"
+        [attr.aria-labelledby]="'accordion-header-' + index">
+        {{ item.Answer }}
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+  
+    </div>
+  </section>

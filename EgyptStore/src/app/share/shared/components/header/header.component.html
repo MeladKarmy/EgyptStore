@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home"><img src="../../../../../assets/images/logo.png" alt="" width="60px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="/home">home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="/contact">contact us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="/proudcts">proudcts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"  routerLink="login">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="register">register</a>
+          </li>
+          <li class="nav-item">
+            <!-- <mat-icon>remove_shopping_cart</mat-icon> -->
+            <button mat-icon-button  [matMenuTriggerFor]="menu">
+              <mat-icon matBadge="15" matBadgeColor="warn">shopping_cart</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div class="menu">
+                  <button mat-menu-item>
+                    <div class="d-flex">
+                      <p class="me-5">proudct</p>
+                      <p>price</p>
+                    </div>
+                  </button>
+                <button mat-menu-item>Item 2</button>
+                </div>
+              </mat-menu>
+            </button>
+           </li>
+          <li class="nav-item" >
+            <button mat-icon-button  [matMenuTriggerFor]="menu1">
+              <mat-icon matBadge={{proudctsFav!.length}} matBadgeColor="warn">thumb_up</mat-icon>
+              <mat-menu #menu1="matMenu">
+                <div class="menu">
+                  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                    <div class="example-box container" *ngFor="let product of proudctsFav" cdkDrag>
+                      <div class="row p-2">
+                        <div class="col-12">
+                          <mat-card class="example-card">
+                            <mat-card-header>
+                              <mat-card-title-group>
+                                <mat-card-title>{{product.title}}</mat-card-title>
+                                <mat-card-subtitle>{{product.price}}</mat-card-subtitle>
+                                <img mat-card-sm-image src="../../../../../assets/images/dress-shirt-img.png" >
+                              </mat-card-title-group>
+                            </mat-card-header>
+                           
+                          </mat-card>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </mat-menu>
+            </button>
+           </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+                          
+  

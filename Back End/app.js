@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const cors = require('cors')
 dotenv.config({ path: 'config.env' })
 const server = express();
 const PORT = process.env.PORT || 8000
@@ -10,7 +11,7 @@ const RouterCtagoray = require('./Routes/catagory')
 const RouterSubCatagory = require('./Routes/subCatagory')
 const RouterProudcts = require('./Routes/proudcts')
 const RouterUsers = require('./Routes/user')
-
+const multer = require('multer');
 
 // first middel ware 
 // secand middel ware
@@ -26,6 +27,9 @@ mongoose.connect(process.env.BD_URI).then(() => {
 
 server.use(morgan('tiny'));
 server.use(express.json())
+server.use(express.urlencoded({ extended: true }));
+
+server.use(cors())
 server.use('/catagory', RouterCtagoray)
 server.use('/subcatagory', RouterSubCatagory)
 server.use('/proudcts', RouterProudcts)

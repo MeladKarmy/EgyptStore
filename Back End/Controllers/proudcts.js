@@ -12,17 +12,14 @@ getAllProudcts = (req, res, next) => {
     let q = JSON.stringify(req.query)
     let queryString = q.replace(/\b(gte|gt|lt|lte)\b/g, (match) => `$${match}`)
     proudcts.find(JSON.parse(queryString), { _id: 0, __v: 0, slug: 0 }).skip(skip).limit(limit).populate({ path: 'category', select: 'name -_id' }).then((proudcts) => {
-        res.status(200).json({
-            result: proudcts.length, page,
-            data: proudcts
-        })
+        res.status(200).json(proudcts)
     }).catch(err => next(err))
 }
 getProudctsById = (req, res, next) => {
     let proudctId = req.params.id
     proudcts.find({ proudctId }).then((oneproudct) => {
         if (!oneproudct) { throw new ErrorHandling(` ID : ${id}  not found `, 404) }
-        res.status(200).json({ data: oneproudct })
+        res.status(200).json(oneproudct)
     }).catch(err => next(err))
 }
 createProudct = (req, res, next) => {
