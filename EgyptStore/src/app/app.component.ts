@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { ProudctsComponent } from './proudcts/proudcts/components/proudcts/proudcts.component';
+import { IProudct } from './proudcts/proudcts/interface/proudctInterface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'EgyptStore';
+
+
 }
+

@@ -1,7 +1,7 @@
 <div class="card m-auto mb-4">
   <div>
     <img src="../../../../../assets/images/dress-shirt-img.png" class="card-img-top" [alt]="proudct.title" (click)="  goToProudct(proudct.proudctId)">
-  <div (click)="send()">
+  <div (click)="sendFav()">
     <i class="fa-regular fa-heart me-2" [@Fade] (click)="addToFavorite()" *ngIf="!proudct.fav" ></i>
   <i class="fa-solid fa-heart primary" [@Fade] (click)="addToFavorite()" *ngIf="proudct.fav"></i>
   </div>

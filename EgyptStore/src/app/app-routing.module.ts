@@ -5,6 +5,8 @@ import { ContactComponent } from './main/components/contact/contact.component';
 import { AboutComponent } from './main/components/about/about.component';
 import { ProudctsComponent } from './proudcts/proudcts/components/proudcts/proudcts.component';
 import { ProudctDetailsComponent } from './proudcts/proudcts/components/proudct-details/proudct-details.component';
+import { LoginComponent } from './Auth/auth/components/login/login.component';
+import { RegisterComponent } from './Auth/auth/components/register/register.component';
 
 const routes: Routes = [
 
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'proudcts', component: ProudctsComponent },
   { path: 'singleProudct/:id', component: ProudctDetailsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

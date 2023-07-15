@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { IProudct } from '../interface/proudctInterface';
 
 
@@ -8,6 +8,16 @@ import { IProudct } from '../interface/proudctInterface';
   providedIn: 'root'
 })
 export class ProudctService {
+  cart: any = []
+  private myFav: any = { counter: 12 };
+
+  get state() {
+    return this.myFav;
+  }
+
+  incrementCounter() {
+    this.myFav.counter++;
+  }
   ctag = 'http://localhost:3030/proud'
   pro = 'http://localhost:3030/proudcts'
 
@@ -29,6 +39,13 @@ export class ProudctService {
     return this.http.get<any>(`${this.pro}/${id}`).pipe(catchError((err) => {
       return throwError(() => err.message || "Server error")
     }))
+  }
+  getCart(x: any) {
+    this.cart.push(x)
+    return this.cart
 
+  }
+  getlength() {
+    return this.cart.length
   }
 }

@@ -53,6 +53,19 @@
     margin-bottom: 8px;
 }
 
+.removeRed {
+    color: red;
+    text-align: end;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.menu {
+    width: 100%;
+    background-color: rgb(34, 142, 150);
+}
 
 // ::ng-deep .example-card {
 //     transform: scale(.9);

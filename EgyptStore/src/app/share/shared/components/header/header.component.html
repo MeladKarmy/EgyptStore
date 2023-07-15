@@ -25,45 +25,49 @@
             <a class="nav-link" routerLink="register">register</a>
           </li>
           <li class="nav-item">
-            <!-- <mat-icon>remove_shopping_cart</mat-icon> -->
-            <button mat-icon-button  [matMenuTriggerFor]="menu">
-              <mat-icon matBadge="15" matBadgeColor="warn">shopping_cart</mat-icon>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon matBadge={{productsActionService.cart.length}} matBadgeColor="warn">shopping_cart</mat-icon>
               <mat-menu #menu="matMenu">
                 <div class="menu">
-                  <button mat-menu-item>
-                    <div class="d-flex">
-                      <p class="me-5">proudct</p>
-                      <p>price</p>
-                    </div>
-                  </button>
-                <button mat-menu-item>Item 2</button>
+                  <div style="width: 100%;" mat-menu-item (click)="goToProudct(i)" *ngFor="let product of productsActionService.cart let i=index" >
+                    <div class="d-flex" >
+                          <mat-card class="example-card" >
+                            <i class="fa-solid fa-trash removeRed" (click)="removeFromCart(i)"></i>
+                            <mat-card-header >
+                              <mat-card-title-group>
+                                <mat-card-title>{{productsActionService.cart[i].title}}</mat-card-title>
+                                <mat-card-subtitle>{{productsActionService.cart[i].price}}</mat-card-subtitle>
+                                <img mat-card-sm-image src="../../../../../assets/images/dress-shirt-img.png" >
+                              </mat-card-title-group>
+                            </mat-card-header>
+                          </mat-card>
+                        </div>
+                  </div>
                 </div>
               </mat-menu>
             </button>
            </li>
-          <li class="nav-item" >
-            <button mat-icon-button  [matMenuTriggerFor]="menu1">
-              <mat-icon matBadge={{proudctsFav!.length}} matBadgeColor="warn">thumb_up</mat-icon>
-              <mat-menu #menu1="matMenu">
-                <div class="menu">
-                  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-                    <div class="example-box container" *ngFor="let product of proudctsFav" cdkDrag>
+          <li class="nav-item">
+            <button mat-icon-button  [matMenuTriggerFor]="menuFav">
+              <mat-icon matBadge={{productsActionService.favourits.length}} matBadgeColor="warn">thumb_up</mat-icon>
+              <mat-menu #menuFav="matMenu" >
+                <div class="menu" >
+                  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" >
+                    <div class="example-box container" *ngFor="let product of productsActionService.favourits let i=index" cdkDrag>
                       <div class="row p-2">
                         <div class="col-12">
                           <mat-card class="example-card">
-                            <mat-card-header>
+                            <i class="fa-solid fa-trash removeRed" (click)="removeFromFav(i)"></i>
+                            <mat-card-header (click)="goToProudct(i)">
                               <mat-card-title-group>
-                                <mat-card-title>{{product.title}}</mat-card-title>
-                                <mat-card-subtitle>{{product.price}}</mat-card-subtitle>
+                                <mat-card-title>{{productsActionService.favourits[i].title}}</mat-card-title>
+                                <mat-card-subtitle>{{productsActionService.favourits[i].price}}</mat-card-subtitle>
                                 <img mat-card-sm-image src="../../../../../assets/images/dress-shirt-img.png" >
                               </mat-card-title-group>
                             </mat-card-header>
-                           
                           </mat-card>
                         </div>
-
                       </div>
-
                     </div>
                   </div>
                 </div>

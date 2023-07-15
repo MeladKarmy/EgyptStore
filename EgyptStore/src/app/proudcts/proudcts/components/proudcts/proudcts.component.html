@@ -2,7 +2,7 @@
   <div class="container my-5 ">
     <div class="row">
       <div class="col-10 col-md-5 col-lg-4 m-auto" *ngFor="let proudct of proudcts let i=index">
-        <app-product-card [proudct]="proudct" (oneFav)="productFav($event)"></app-product-card>
+        <app-product-card [proudct]="proudct" (oneFav)="productFav($event)" (oneCart)="productCart($event)"></app-product-card>
       </div>
     </div>
   </div>
