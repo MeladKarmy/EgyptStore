@@ -1,0 +1,91 @@
+<section class="container my-5 ">
+   <div class="row">
+    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+        <h3 class="text-center">Welcom to LoGin</h3>
+        <form class="border rounded p-5 " [formGroup]="RegisterForm" (submit)="submit()" >
+            <div class="form-group my-3">
+            <label>First Name :</label>
+            <input type="text" class="form-control" [class.is-invalid]="FN ?.touched && FN ?.invalid" formControlName="firstName" >
+                <div *ngIf="FN?.touched && FN ?.invalid">
+                    <small class="text-danger" *ngIf="FN?.errors?.['required']">First Name is Require.</small>
+                    <small class="text-danger" *ngIf="FN?.errors?.['minLength']">First Name letter must be more than 3.</small>
+                    <small class="text-danger" *ngIf="FN?.errors?.['pattern']">First Name contain only letters.</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>Last Name :</label>
+            <input type="text" class="form-control" [class.is-invalid]="LN ?.touched && LN ?.invalid" formControlName="lastName" >
+                <div *ngIf="LN?.touched && LN ?.invalid">
+                    <small class="text-danger" *ngIf=" LN?.errors?.['required']">Last Name is Require.</small>
+                    <small class="text-danger" *ngIf="LN?.errors?.['minLength']">Last Name letter must be more than 5.</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>Email address:</label>
+            <input type="email" class="form-control" [class.is-invalid]="Email ?.touched && Email ?.invalid" formControlName="email" >
+                <div *ngIf="Email?.touched && Email ?.invalid">
+                    <small class="text-danger" *ngIf=" Email?.errors?.['required']">Email is Require.</small>
+                    <small class="text-danger" *ngIf=" Email?.errors?.['pattern']">Email Example logo@logo.com</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>Password :</label>
+            <p-password  class="form-control card"  [toggleMask]="true" [class.is-invalid]="Pass ?.touched && Pass ?.invalid" formControlName="password"></p-password>
+                <div *ngIf="Pass?.touched && Pass ?.invalid">
+                    <small class="text-danger" *ngIf=" Pass?.errors?.['required']">Password is Require.</small>
+                    <small class="text-danger" *ngIf="Pass?.errors?.['min']">Password must be more than 6.</small>
+                    <small class="text-danger" *ngIf=" Pass?.errors?.['pattern']">Password must be contain digit only.</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>configPassword :</label>
+            <input type="password" class="form-control" [class.is-invalid]="config ?.touched && config ?.invalid" formControlName="configPassword" >
+                <div *ngIf="config?.touched && config ?.invalid">
+                    <small class="text-danger" *ngIf=" config?.errors?.['required']">configPassword is Require.</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>Phone :</label>
+            <input type="number" class="form-control" formControlName="phone" >
+                <div *ngIf="phone?.touched && phone ?.invalid">
+                    <small class="text-danger" *ngIf=" phone?.errors?.['required']">tel is Require.</small>
+                    <small class="text-danger" *ngIf=" phone?.errors?.['pattern']">tel must be 11 digit.</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>Age :</label>
+            <input type="number" class="form-control" formControlName="age" >
+                <div *ngIf="Age?.touched && Age ?.invalid">
+                    <small class="text-danger" *ngIf=" Age?.errors?.['required']">Age is Require.</small>
+                </div>
+            </div>
+            <div class="form-group my-3">
+            <label>Image :</label>
+            <input type="file" class="form-control" formControlName="image" >
+                <div *ngIf="gender?.touched && gender ?.invalid">
+                    <small class="text-danger" *ngIf=" gender?.errors?.['required']">tel is Require.</small>
+                    <small class="text-danger" *ngIf=" gender?.errors?.['pattern']">tel must be 11 digit.</small>
+                </div>
+            </div>
+            <div class="form-group mt-5">
+                <label formControlName="gender" class="mb-3">Gender :</label><br>
+                <span>Male  </span><input type="radio" name="gender" value="male" class="me-5" formControlName="gender">
+                <span>famel  </span><input type="radio" name="gender" value="famel" formControlName="gender">
+                <div >
+                    <small class="text-danger" *ngIf=" gender?.errors?.['required']">Gender is Require.</small>
+                </div>
+            </div>
+            <div>
+                <a href="">login</a>
+            </div>
+
+            <!-- <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+            </div> -->
+            <button type="submit"  class="btn btn-primary m-3">Submit</button>
+        </form>
+
+    </div>
+
+   </div>
+</section>

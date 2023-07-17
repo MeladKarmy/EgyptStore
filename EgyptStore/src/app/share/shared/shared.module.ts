@@ -16,7 +16,8 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { PasswordModule } from 'primeng/password';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -28,6 +29,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     CommonModule,
     HttpClientModule,
     FormsModule,
+    BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ScrollTopModule,
@@ -40,6 +42,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     MatCardModule,
     DragDropModule,
     DataViewModule,
+    PasswordModule
 
 
   ], exports: [
@@ -47,6 +50,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     FooterComponent,
     ScrolComponent,
     FormsModule,
+    BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     CdkAccordionModule,
@@ -54,7 +58,8 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
     MatButtonModule,
     DragDropModule,
     DataViewModule,
-    DataViewLayoutOptions
+    DataViewLayoutOptions,
+    PasswordModule
 
   ]
 })

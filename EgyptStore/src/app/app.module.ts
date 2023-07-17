@@ -6,6 +6,7 @@ import { SharedModule } from './share/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { ProudctsModule } from './proudcts/proudcts/proudcts.module';
+import { AuthModule } from './Authuntication/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProudctsModule } from './proudcts/proudcts/proudcts.module';
     SharedModule,
     BrowserAnimationsModule,
     MainModule,
-    ProudctsModule
+    ProudctsModule,
+    AuthModule
 
 
   ],
