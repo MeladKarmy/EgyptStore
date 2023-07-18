@@ -2,15 +2,15 @@ const express = require('express');
 const user = require('../Controllers/user');
 const validator = require('../utilles/validaitor/user')
 const router = express.Router()
-
+const upload = require('../utilles/handelImages')
 
 router.route('/')
     .get(user.getAllUsers)
-    .post(validator.createUserValidation, user.createUser)
+    .post(upload.single('image'), validator.createUserValidation, user.createUser)
 
 router.route('/:id')
     .get(validator.getProudctValidation, user.getUserById)
-    .put(validator.updateProudctValidation, user.updateUser)
+    .put(user.updateUser)
     .delete(validator.deleteUserValidation, user.deleteUser)
 
 

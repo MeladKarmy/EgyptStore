@@ -34,25 +34,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    phone: {
-        type: Number,
-        trim: true,
-        require: true,
-        unique: [true, "Phone is already used"],
-        min: [11, "phone Number not correct"],
-        max: [11, "phone Number not correct"]
-    },
     email: {
         type: String,
         trim: true,
         require: [true, "First Name Is Require"],
         unique: [true, "Email aready used"],
-    },
-    gender: {
-        type: String,
-        trim: true,
-        enum: ['male', 'famale'],
-        require: [true, "Gender is Require"]
+        lowercase: true
     },
     password: {
         type: String,
@@ -60,7 +47,40 @@ const userSchema = new mongoose.Schema({
         require: [true, "password Is Require"],
         min: [8, "password Is too short"],
     },
-    status: Boolean,
+    phone: {
+        type: String,
+        trim: true,
+        require: true,
+        unique: [true, "Phone is already used"],
+        min: [11, "phone Number not correct"],
+        max: [11, "phone Number not correct"]
+    },
+    age: {
+        type: Number,
+        trim: true,
+        require: true,
+        min: [12, "age more than 12 years"],
+    },
+    image: {
+        type: String,
+        require: [true, "Image Is Require"],
+        trim: true
+    },
+    gender: {
+        type: String,
+        trim: true,
+        enum: ['male', 'famale'],
+        require: [true, "Gender is Require"]
+    },
+    status: {
+        type: Boolean,
+        default: true
+    },
+    active: {
+        type: Boolean,
+        default: false
+    },
+    favorits: [],
     comments: {
         type: commentsSchema,
     },
@@ -73,11 +93,6 @@ const userSchema = new mongoose.Schema({
         enum: ['client', 'admin'],
         default: 'client'
     },
-    image: {
-        type: String,
-        require: [true, "Image Is Require"],
-        trim: true
-    }
 
 
 }, { timestamps: true })

@@ -1,4 +1,4 @@
-const { body, param, validationResult } = require('express-validator');
+const { body, param, validationResult, check } = require('express-validator');
 
 const error = (req, res, next) => {
     const error = validationResult(req)
@@ -8,10 +8,9 @@ const error = (req, res, next) => {
 //post validaition
 exports.createCatagoryValidation =
     [
-        body('name').isString().notEmpty().withMessage('Catagory Name is Require')
+        check('name').isString().notEmpty().withMessage('Catagory Name is Require')
             .isLength({ min: 5 }).withMessage("Catagory Name is too short")
             .isLength({ max: 20 }).withMessage("Catagory Name is too long"),
-        body('image').notEmpty().isString().withMessage('Image Catagory is Require'),
         error
     ]
 
@@ -31,7 +30,6 @@ exports.updateCatagoryValidation =
         body('name').isString().notEmpty().withMessage('Catagory Name is Require')
             .isLength({ min: 5 }).withMessage("Catagory Name is too short")
             .isLength({ max: 20 }).withMessage("Catagory Name is too long"),
-        body('image').notEmpty().isString().withMessage('Image Catagory is Require'),
         error
     ]
 // Delete validation

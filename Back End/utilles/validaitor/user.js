@@ -20,15 +20,13 @@ exports.createUserValidation =
         body('email').notEmpty().withMessage('Email is Require').isEmail().withMessage('Email invalid')
             .isLength({ min: 5 }).withMessage("Catagory Name is too short")
             .isLength({ max: 20 }).withMessage("Catagory Name is too long"),
-        body("gender").notEmpty().withMessage("Gender is required"),
+        body("gender").notEmpty().withMessage("Gender is required").optional(),
         body('password').isString().notEmpty().withMessage('Password is Require')
             .isLength({ min: 8 }).withMessage("description is too short"),
         body('configPass').isString().notEmpty().withMessage('Password is Require')
-            .isLength({ min: 8 }).withMessage("description is too short").custom((configPass) => { }),
-        body('status').notEmpty().withMessage('status is Require').isBoolean().withMessage('status is Boolean'),
+            .isLength({ min: 8 }).withMessage("description is too short"),
         body('comments').optional().isObject(),
-        body('payment').optional().isObject(),
-        body('image').notEmpty().isString().withMessage('Image is Require'),
+        body('image').optional(),
         error
     ]
 

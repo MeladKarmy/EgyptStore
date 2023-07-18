@@ -1,7 +1,8 @@
 const users = require('../Models/user');
 const slugify = require('slugify');
 const ErrorHandling = require('../utilles/err');
-
+const cloudinary = require('../utilles/cloudinary');
+const user = require('../Models/user');
 getAllUsers = (req, res, next) => {
     users.find({}, { __v: 0 }).then((Users) => {
         res.status(200).json({ data: Users })
@@ -9,39 +10,65 @@ getAllUsers = (req, res, next) => {
 }
 getUserById = (req, res, next) => {
     let id = req.params.id
-    users.findById({ _id: id }, { __v: 0 }).then((oneUser) => {
+    users.findOne({ email: req.body.email }, { __v: 0 }).then((oneUser) => {
         if (!oneUser) { throw new ErrorHandling(` ID : ${id}  not found `, 404) }
         res.status(200).json({ data: oneUser })
     }).catch(err => next(err))
 }
 createUser = (req, res, next) => {
-    // let { firstName, lastName, email, password, status, payment, comments, Role } = req.body;
-    // users.create({ firstName, lastName, email, password, status, payment, fullName, Role, slug: slugify(fullName), comments }).then((newObj) => {
-    req.body.fullName = firstName + " " + lastName
-    req.body.slug = slugify(fullName)
-    users.create(req.body).then((newObj) => {
-        res.status(201).json({ data: newObj })
-    }).catch(err => next(err))
+    let { firstName, lastName, email, password, phone, gender, image, age } = req.body;
+    let fullName = firstName + " " + lastName
+    users.findOne({ email: req.body.email }).then(user => {
+        if (user) { return res.status(400).json({ data: ` Email  : ${req.body.email}  Already used ` }) }
+        cloudinary.uploader.upload(req.file.path, { folder: "EgyptStore/users" }, (err, result) => {
+            if (err) { return next(err); }
+        }).then((x) => {
+            users.create({
+                firstName,
+                lastName,
+                fullName,
+                slug: slugify(fullName),
+                email,
+                password,
+                phone,
+                age,
+                image: x.url,
+                gender,
+            })
+
+        }).then((newUser) => {
+            res.status(201).json({ data: "Welcome to Egypt Store .. Your data created", status: "completed" })
+        }).catch(err => next(err))
+    })
 }
 
 updateUser = (req, res, next) => {
     let id = req.params.id;
-    // let { firstName, lastName, email, password, status, payment, comments, Role } = req.body;
-    // let fullName = firstName + " " + lastName
-    // users.findOneAndUpdate({ _id: id }, { firstName, lastName, email, password, Role, status, payment, fullName, slug: slugify(fullName), comments }, { new: true })
-    req.body.fullName = firstName + " " + lastName
-    req.body.slug = slugify(fullName)
-    users.findOneAndUpdate({ _id: id }, req.body, { new: true })
-        .then((objUpdate) => {
-            if (!objUpdate) { throw new ErrorHandling('ID is Not Found : ' + " " + id, 404) }
-            res.status(200).json({ data: objUpdate });
+    if (req.body.firstName && req.body.lastName) {
+        req.body.fullName = req.body.firstName + " " + req.body.lastName;
+        req.body.slug = slugify(req.body.fullName);
+    }
+    users.findById({ _id: id })
+        .then((user) => {
+            if (!user) { throw new ErrorHandling(` ID : ${id}  not found `, 404) }
+            else {
+
+                users.findOne(req.email).then((email) => {
+                    if (email) { return res.status(400).json({ data: 'Email Already used' }) }
+
+                    users.findOneAndUpdate({ _id: id }, req.body, { new: true })
+                        .then((data) => {
+                            res.status(200).json({ message: "Done" });
+                        })
+                })
+            }
         }).catch((err) => next(err));
 };
 deleteUser = (req, res, next) => {
     let id = req.params.id
-    users.findOneAndDelete({ _id: id }).then((deleteObj) => {
+    users.findOneAndUpdate({ _id: id }, { status: false }, { new: true }).then((deleteObj) => {
         if (!deleteObj) { throw new ErrorHandling('ID is Not Found : ' + " " + id, 404) }
-        res.status(200).json({ Massage: "Object Is Deleted" })
+        res.status(200).json({ Massage: "user Is Deleted" })
     }).catch((err) => next(err))
 }
 

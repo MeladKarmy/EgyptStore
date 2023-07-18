@@ -1,7 +1,8 @@
 const catagory = require('../Models/catagory');
 const slugify = require('slugify');
 const ErrorHandling = require('../utilles/err');
-
+const upload = require('../utilles/handelImages');
+const cloudinary = require('../utilles/cloudinary')
 getAllCatagory = (req, res, next) => {
     // const page = req.body.page *1 || 1;
     // const limit = req.body.limit *1 || 2;
@@ -19,10 +20,13 @@ getById = (req, res, next) => {
 }
 
 createCatagory = (req, res, next) => {
-    let { name, image } = req.body
+    let { name } = req.body
+    cloudinary.uploader.upload(req.file.path, { folder: "EgyptStore/catagory" }, (err, result) => {
+        if (err) { return next(err); }
+    }).then((x) => {
 
-    catagory.create({ name, slug: slugify(name), image })
-        .then((newObj) => res.status(201).json({ data: newObj }))
+        catagory.create({ name, slug: slugify(name), image: x.url })
+    }).then((ne) => res.status(201).json({ data: ne }))
         .catch((err) => next(err));
 }
 

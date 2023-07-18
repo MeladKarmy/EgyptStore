@@ -11,7 +11,6 @@ const RouterCtagoray = require('./Routes/catagory')
 const RouterSubCatagory = require('./Routes/subCatagory')
 const RouterProudcts = require('./Routes/proudcts')
 const RouterUsers = require('./Routes/user')
-const multer = require('multer');
 
 // first middel ware 
 // secand middel ware
@@ -27,7 +26,7 @@ mongoose.connect(process.env.BD_URI).then(() => {
 
 server.use(morgan('tiny'));
 server.use(express.json())
-server.use(express.urlencoded({ extended: true }));
+server.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 server.use(cors())
 server.use('/catagory', RouterCtagoray)
