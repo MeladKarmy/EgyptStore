@@ -17,7 +17,17 @@ const sucCatagorySchma = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'catagory',
         require: [true, "subCatagory must be belong to Catagory Name"],
+    },
+    image: {
+        type: String,
+        trim: true,
+        require: [true, "Image Is Require"],
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
+
 }, { timestamps: true })
 
 const subCatagoryModel = mongoose.model('subCatagory', sucCatagorySchma);

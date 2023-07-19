@@ -1,5 +1,9 @@
 const { body, param, validationResult } = require('express-validator');
-
+const error = (req, res, next) => {
+    let error = validationResult(req);
+    if (!error.isEmpty()) { return res.status(400).json({ error: error.array() }) }
+    next()
+}
 exports.createSubCatagoryValidation =
     [
         body('name').notEmpty().isString().withMessage('subCatagory Is Require')
@@ -7,21 +11,14 @@ exports.createSubCatagoryValidation =
             .withMessage('Catagory Name is too long'),
         body('catagory').isMongoId().withMessage('ID Is not ObjectId').notEmpty()
             .withMessage('subCatagory must be belong to Catagory'),
-        (req, res, next) => {
-            let error = validationResult(req);
-            if (!error.isEmpty()) { return res.status(400).json({ error: error.array() }) }
-            next()
-        }
+        error
+
     ]
 exports.getSubCatagoryValidation =
     [
         param('id').notEmpty().withMessage('subCatagory ID Is Require')
             .isMongoId().withMessage('subCatagory ID Is ObjectId'),
-        (req, res, next) => {
-            let error = validationResult(req);
-            if (!error.isEmpty()) { return res.status(400).json({ error: error.array() }) }
-            next()
-        }
+        error
     ]
 exports.updateSubCatagoryValidation =
     [
@@ -32,19 +29,11 @@ exports.updateSubCatagoryValidation =
             .withMessage('Catagory Name is too long'),
         body('catagory').isMongoId().withMessage('ID Is not ObjectId').notEmpty()
             .withMessage('subCatagory must be belong to Catagory'),
-        (req, res, next) => {
-            let error = validationResult(req);
-            if (!error.isEmpty()) { return res.status(400).json({ error: error.array() }) }
-            next()
-        }
+        error
     ]
 exports.deleteSubCatagoryValidation =
     [
         param('id').notEmpty().withMessage('subCatagory ID Is Require')
             .isMongoId().withMessage('subCatagory ID Is ObjectId'),
-        (req, res, next) => {
-            let error = validationResult(req);
-            if (!error.isEmpty()) { return res.status(400).json({ error: error.array() }) }
-            next()
-        }
+        error
     ]

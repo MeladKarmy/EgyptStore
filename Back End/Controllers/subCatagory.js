@@ -1,10 +1,13 @@
 const subCatagory = require('../Models/subCatagory');
+const Catagory = require('../Models/catagory');
 const slugify = require('slugify');
 const ErrorHandling = require('../utilles/err');
+const cloudinary = require('../utilles/cloudinary')
 
 
 getAllSubCatagory = (req, res, next) => {
-    subCatagory.find({}, { _id: 0, __v: 0, slug: 0 }).populate({ path: 'catagory', select: 'name -_id' }).then((subcatagory) => {
+    subCatagory.find({}, { __v: 0 }).populate({ path: 'catagory', select: 'name _id' }).then((subcatagory) => {
+        if (!subcatagory.length) { return res.status(200).json({ data: "No subcatagory Existed" }) }
         res.status(200).json({ data: subcatagory })
     }).catch(err => next(err))
 }
@@ -17,27 +20,79 @@ getSubCatagoryById = (req, res, next) => {
 }
 createSubCatagory = (req, res, next) => {
     let { name, catagory } = req.body;
-    // if (name.trim == "" && name.trim.length > 4) { throw new ErrorHandling('Name is Not  white space ', 404) }
-    subCatagory.create({ name, slug: slugify(name), catagory }).then((newObj) => {
-        res.status(201).json({ data: newObj })
-    }).catch(err => next(err))
+    Catagory.findById(catagory)
+        .then((ctag) => {
+            if (!ctag) { return res.status(404).json({ data: "Catagory not found" }); }
+            return subCatagory.findOne({ name });
+        })
+        .then((subCtag) => {
+            if (subCtag) { throw new ErrorHandling("subCatagory name already exists", 404); }
+            return cloudinary.uploader.upload(req.file.path, { folder: "EgyptStore/subcatagory" })
+        })
+        .then((cloudinaryImage) => {
+            let image = cloudinaryImage.url;
+            return subCatagory.create({ name, slug: slugify(name), catagory, image });
+        })
+        .then((newSubCtag) => {
+            return res.status(201).json({ data: "subCatagory created successfully" });
+        })
+        .catch((err) => {
+            console.error(err);
+            return res.status(409).json({ error: err.message });
+        });
 }
+
+
+
 
 updateSubCatagory = (req, res, next) => {
     let id = req.params.id;
     let { name, catagory } = req.body;
-    subCatagory.findOneAndUpdate({ _id: id }, { name, slug: slugify(name), catagory }, { new: true })
-        .then((objUpdate) => {
-            if (!objUpdate) { throw new ErrorHandling('ID is Not Found' + " " + id, 404) }
-            res.status(200).json({ data: objUpdate });
+    subCatagory.findById(id)
+        .then((existingSubCategory) => {
+            if (!existingSubCategory) { res.status(404).json({ data: "subCategory ID not found" }) }
+            return subCatagory.findOne({ name })
+                .then((existingName) => {
+                    if (existingName && existingName._id.toString() !== id) { res.status(409).json({ error: "subCategory name already exists" }) }
+                    Catagory.findById(catagory).then((ctag) => {
+                        if (!ctag) { res.status(404).json({ data: "Category ID not found" }) }
+                        return cloudinary.uploader.upload(req.file.path, { folder: "EgyptStore/subcatagory" })
+                    }).then((result) => {
+                        existingSubCategory.name = name;
+                        existingSubCategory.slug = slugify(name);
+                        existingSubCategory.image = result.url;
+                        existingSubCategory.save();
+                    }).then((updatedCategory) => {
+                        res.status(200).json({ data: "Subcategory updated successfully" });
+                    });
+                })
         }).catch((err) => next(err));
-};
+}
+// updateSubCatagory = (req, res, next) => {
+//     let id = req.params.id;
+//     let { name, catagory } = req.body;
+//     subCatagory.findOneAndUpdate({ _id: id }, { name, slug: slugify(name), catagory }, { new: true })
+//         .then((objUpdate) => {
+//             if (!objUpdate) { throw new ErrorHandling('ID is Not Found' + " " + id, 404) }
+//             res.status(200).json({ data: objUpdate });
+//         }).catch((err) => next(err));
+// };
+
+
+
 deleteSubCatagory = (req, res, next) => {
     let id = req.params.id
-    subCatagory.findOneAndDelete({ _id: id }).then((deleteObj) => {
-        if (!deleteObj) { throw new ErrorHandling('ID is Not Found' + " " + id, 404) }
-        res.status(200).json({ Massage: "Object Is Deleted" })
-    }).catch((err) => next(err))
+    subCatagory.findById(id).then((subCtag) => {
+        if (!subCtag) { return res.status(404).json({ data: "Catagory ID is not found" }) }
+        if (subCtag.status == true) {
+            subCtag.status = false
+        } else {
+            subCtag.status = true
+        }
+        return subCtag.save()
+    }).then((data) => {
+        return res.status(200).json({ data: "Done" })
+    })
 }
 
 

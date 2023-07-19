@@ -21,6 +21,10 @@ const catagorySchema = new mongoose.Schema(
             type: String,
             trim: true,
             require: [true, "Image Is Require"],
+        },
+        status: {
+            type: Boolean,
+            default: true
         }
 
     }, { timestamps: true })

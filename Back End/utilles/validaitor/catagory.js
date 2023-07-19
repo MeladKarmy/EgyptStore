@@ -1,4 +1,4 @@
-const { body, param, validationResult, check } = require('express-validator');
+const { body, param, validationResult } = require('express-validator');
 
 const error = (req, res, next) => {
     const error = validationResult(req)
@@ -8,7 +8,7 @@ const error = (req, res, next) => {
 //post validaition
 exports.createCatagoryValidation =
     [
-        check('name').isString().notEmpty().withMessage('Catagory Name is Require')
+        body('name').isString().notEmpty().withMessage('Catagory Name is Require')
             .isLength({ min: 5 }).withMessage("Catagory Name is too short")
             .isLength({ max: 20 }).withMessage("Catagory Name is too long"),
         error
@@ -35,9 +35,7 @@ exports.updateCatagoryValidation =
 // Delete validation
 exports.deleteCatagoryValidation =
     [
-        param('id').isMongoId().notEmpty().withMessage('Catagory ID is Require')
-            .isLength({ min: 5 }).withMessage("Catagory Name is too short")
-            .isLength({ max: 20 }).withMessage("Catagory Name is too long"),
+        param('id').isMongoId().notEmpty().withMessage('Catagory ID is Require'),
         error
     ]
 

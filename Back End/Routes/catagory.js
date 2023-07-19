@@ -10,7 +10,7 @@ router.route('/')
     .post(upload.single('image'), validator.createCatagoryValidation, catagory.createCatagory)
 router.route('/:id')
     .get(validator.getCatagoryValidation, catagory.getById)
-    .put(validator.updateCatagoryValidation, catagory.updateCatagory)
+    .put(upload.single('image'), validator.updateCatagoryValidation, catagory.updateCatagory)
     .delete(validator.deleteCatagoryValidation, catagory.deleteById)
 
 

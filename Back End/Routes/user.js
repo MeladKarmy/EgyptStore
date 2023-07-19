@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/:id')
     .get(validator.getProudctValidation, user.getUserById)
-    .put(user.updateUser)
+    .put(upload.single('image'), validator.updateProudctValidation, user.updateUser)
     .delete(validator.deleteUserValidation, user.deleteUser)
 
 
