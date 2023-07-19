@@ -2,14 +2,15 @@ const express = require('express');
 const proudcts = require('../Controllers/proudcts');
 const validator = require('../utilles/validaitor/proudcts')
 const router = express.Router()
+const upload = require('../utilles/handelImages');
 
 
 router.route('/')
     .get(proudcts.getAllProudcts)
-    .post(validator.createProudctValidation, proudcts.createProudct)
+    .post(upload.any(), validator.createProudctValidation, proudcts.createProudct)
 router.route('/:id')
     .get(validator.getProudctValidation, proudcts.getProudctsById)
-    .put(validator.updateProudctValidation, proudcts.updateProudct)
+    .put(upload.any(), validator.updateProudctValidation, proudcts.updateProudct)
     .delete(validator.deleteProudctValidation, proudcts.deleteProudct)
 
 

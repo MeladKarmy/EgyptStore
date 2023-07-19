@@ -1,7 +1,9 @@
 const proudcts = require('../Models/proudcts');
+const Catagory = require('../Models/catagory');
+const subCatagory = require('../Models/subCatagory');
 const slugify = require('slugify');
 const ErrorHandling = require('../utilles/err');
-const { json } = require('express');
+const cloudinary = require('../utilles/cloudinary')
 
 
 getAllProudcts = (req, res, next) => {
@@ -38,14 +40,14 @@ getAllProudcts = (req, res, next) => {
     proudcts.find(JSON.parse(queryString),
         { _id: 0, __v: 0, slug: 0 }).skip(skip).limit(limit).populate({ path: 'category', select: 'name -_id' })
         .then((proudcts) => {
-            res.status(200).json(proudcts)
+            res.status(200).json({ data: proudcts })
         }).catch(err => next(err))
 }
 getProudctsById = (req, res, next) => {
     let proudctId = req.params.id
     proudcts.find({ proudctId }).then((oneproudct) => {
         if (!oneproudct) { throw new ErrorHandling(` ID : ${id}  not found `, 404) }
-        res.status(200).json(oneproudct)
+        res.status(200).json({ data: oneproudct })
     }).catch(err => next(err))
 }
 createProudct = (req, res, next) => {
@@ -63,6 +65,8 @@ createProudct = (req, res, next) => {
         statusStock,
         rating,
         comments } = req.body;
+
+
     proudcts.create({
         title,
         description,

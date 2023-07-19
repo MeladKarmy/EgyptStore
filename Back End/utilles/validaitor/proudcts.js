@@ -23,14 +23,9 @@ exports.createProudctValidation =
         body('category').notEmpty().withMessage('category is Require')
             .isMongoId().withMessage('category ID is Object of 16 chrachter'),
         body('subCategory').optional().isMongoId().withMessage('category ID is Object of 16 chrachter'),
-        body('ImageCover').notEmpty().isString().withMessage('Image Proudct is Require'),
-        body('images').notEmpty().isArray().withMessage('Image Proudct is Require'),
         body('solid').optional().isNumeric().withMessage('solid is Number'),
         body('stock').isNumeric().notEmpty().withMessage('stock is Require & Number'),
-        body('statusStock').isBoolean().notEmpty().withMessage('statusStock is Require boolean'),
-        body('rating').isNumeric().optional(),
         body('usersRating').isNumeric().default().optional(),
-        body('comments').isObject().optional(),
         error
     ]
 
@@ -60,8 +55,6 @@ exports.updateProudctValidation =
         body('category').notEmpty().withMessage('category is Require')
             .isMongoId().withMessage('category ID is Object of 16 chrachter'),
         body('subCategory').optional().isMongoId().withMessage('category ID is Object of 16 chrachter'),
-        body('ImageCover').notEmpty().isString().withMessage('Image Proudct is Require'),
-        body('images').notEmpty().isArray().withMessage('Image Proudct is Require'),
         body('solid').optional().isNumeric().withMessage('solid is Number'),
         body('stock').isNumeric().notEmpty().withMessage('stock is Require & Number'),
         body('statusStock').isBoolean().notEmpty().withMessage('statusStock is Require & Number'),

@@ -1,8 +1,12 @@
 const users = require('../Models/user');
 const slugify = require('slugify');
-const ErrorHandling = require('../utilles/err');
 const cloudinary = require('../utilles/cloudinary');
+const ErrorHandling = require('../utilles/err');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const user = require('../Models/user');
+
+
 getAllUsers = (req, res, next) => {
     users.find({}, { __v: 0 }).then((Users) => {
         if (!Users.length) { return res.status(200).json({ data: "No Users Existed" }) }
@@ -16,6 +20,7 @@ getUserById = (req, res, next) => {
         res.status(200).json({ data: oneUser })
     }).catch(err => next(err))
 }
+
 createUser = (req, res, next) => {
     let { firstName, lastName, email, password, phone, gender, image, age } = req.body;
     let fullName = firstName + " " + lastName;
@@ -44,7 +49,8 @@ createUser = (req, res, next) => {
             });
         })
         .then((createuser) => {
-            res.status(201).json({ data: "Welcome to Egypt Store .. Your data created", status: "completed" });
+            let token = jwt.sign({ name: createuser.firstName, userId: createuser._id }, process.env.SECRET_KEY_JWT, { expiresIn: "1h" })
+            res.status(201).json({ data: "Welcome to Egypt Store .. Your data created", status: "completed", token });
         })
         .catch(err => next(err));
 }
@@ -59,6 +65,7 @@ updateUser = (req, res, next) => {
         })
         .then((userByEmail) => {
             if (userByEmail && userByEmail._id.toString() !== id) { throw new ErrorHandling('Email Already Used', 400) }
+
             if (req.body.file) {
                 return cloudinary.uploader.upload(req.file.path, { folder: "EgyptStore/users" })
                     .then((imageCloudiary) => {
@@ -98,9 +105,14 @@ updateUser = (req, res, next) => {
                 return cloudinary.uploader.upload(req.file.path, { folder: "EgyptStore/users" })
                     .then((imageCloudiary) => {
                         req.body.image = imageCloudiary.url;
+                        req.body.password = bcrypt.hashSync(req.body.password, 12);
                         return users.findOneAndUpdate({ _id: id }, req.body, { new: true });
                     })
-            } else { return users.findOneAndUpdate({ _id: id }, req.body, { new: true }) }
+            } else {
+                req.body.password = bcrypt.hashSync(req.body.password, 12);
+                return users.findOneAndUpdate({ _id: id }, req.body, { new: true })
+            }
+
         }).then((updatedUser) => {
             res.status(200).json({ data: "Data updated successfully" });
         }).catch((err) => next(err));

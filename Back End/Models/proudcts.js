@@ -90,6 +90,7 @@ const proudctsSchema = new mongoose.Schema({
     },
     statusStock: {
         type: Boolean,
+        default: true,
         require: [true, "statusStock Is Require"],
     },
     rating: {

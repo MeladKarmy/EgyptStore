@@ -3,6 +3,7 @@ const catagory = require('../Controllers/catagory')
 const validator = require('../utilles/validaitor/catagory')
 const router = express.Router()
 const upload = require('../utilles/handelImages');
+const Auth = require('../Controllers/Auth')
 
 
 router.route('/')

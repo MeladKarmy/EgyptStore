@@ -11,6 +11,7 @@ const RouterCtagoray = require('./Routes/catagory')
 const RouterSubCatagory = require('./Routes/subCatagory')
 const RouterProudcts = require('./Routes/proudcts')
 const RouterUsers = require('./Routes/user')
+const RouterAuth = require('./Routes/Auth')
 
 // first middel ware 
 // secand middel ware
@@ -29,6 +30,7 @@ server.use(express.json())
 server.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 server.use(cors())
+server.use('/Auth', RouterAuth)
 server.use('/catagory', RouterCtagoray)
 server.use('/subcatagory', RouterSubCatagory)
 server.use('/proudcts', RouterProudcts)
@@ -44,7 +46,6 @@ server.use((req, res, next) => {
 
 //middel ware Error
 server.use((error, req, res, next) => {
-    // res.status(400).send(error)
     error.statusCode = error.statusCode || 500
     error.status = error.status || 'error'
     res.status(error.statusCode).json({
