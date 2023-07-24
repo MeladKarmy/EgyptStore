@@ -26,8 +26,8 @@ mongoose.connect(process.env.BD_URI).then(() => {
 // midel ware Routes 
 
 server.use(morgan('tiny'));
+server.use(express.urlencoded({ extended: false }));
 server.use(express.json())
-server.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 server.use(cors())
 server.use('/Auth', RouterAuth)

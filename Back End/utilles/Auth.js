@@ -1,4 +1,4 @@
-const { body, param, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const ErrorHandling = require('./err');
 
 const error = (req, res, next) => {
@@ -15,14 +15,12 @@ exports.signUpValidation =
         body('lastName').notEmpty().withMessage('Last Name is Require').isString().withMessage('Last Name must be String')
             .isLength({ min: 5 }).withMessage("Last Name is too short")
             .isLength({ max: 15 }).withMessage("Last Name is too long"),
-        body('phone').notEmpty().withMessage('phone is Require').isMobilePhone("ar-EG").withMessage('phone number Invalid')
-            .isLength({ min: 11 }).withMessage("phone number not correct")
-            .isLength({ max: 11 }).withMessage("phone number not correct"),
+        body('phone').notEmpty().withMessage('phone is Require').isMobilePhone('ar-EG').withMessage('phone number Invalid'),
         body('email').notEmpty().withMessage('Email is Require').isEmail().withMessage('Email invalid'),
         body("gender").notEmpty().withMessage("Gender is required").isString(),
         body('password').isString().notEmpty().withMessage('Password is Require')
             .isLength({ min: 8 }).withMessage("password is too short"),
-        body('configPass').isString().notEmpty().withMessage('Password is Require')
+        body('configPassword').isString().notEmpty().withMessage('Password is Require')
             .isLength({ min: 8 }).withMessage("configPass is too short")
             .custom((value, { req }) => {
                 if (value !== req.body.password) { throw new ErrorHandling("configPass not match password", 400) }
@@ -31,7 +29,7 @@ exports.signUpValidation =
         body('age').isNumeric().notEmpty().withMessage('age is Numeric')
             .isLength({ min: 2 }).withMessage("age is above 10")
             .isLength({ max: 2 }).withMessage("age is under 100"),
-        body('comments').optional(),
+
         error
     ]
 exports.loginValidation =

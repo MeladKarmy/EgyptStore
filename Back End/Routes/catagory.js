@@ -7,12 +7,12 @@ const Auth = require('../Controllers/Auth')
 
 
 router.route('/')
-    .get(catagory.getAllCatagory)
-    .post(upload.single('image'), validator.createCatagoryValidation, catagory.createCatagory)
+    .get(Auth.checkAuthClient, catagory.getAllCatagory)
+    .post(Auth.checkAuthAdmin, upload.single('image'), validator.createCatagoryValidation, catagory.createCatagory)
 router.route('/:id')
-    .get(validator.getCatagoryValidation, catagory.getById)
-    .put(upload.single('image'), validator.updateCatagoryValidation, catagory.updateCatagory)
-    .delete(validator.deleteCatagoryValidation, catagory.deleteById)
+    .get(Auth.checkAuthClient, validator.getCatagoryValidation, catagory.getById)
+    .put(Auth.checkAuthAdmin, upload.single('image'), validator.updateCatagoryValidation, catagory.updateCatagory)
+    .delete(Auth.checkAuthAdmin, validator.deleteCatagoryValidation, catagory.deleteById)
 
 
 module.exports = router

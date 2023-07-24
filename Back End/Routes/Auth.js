@@ -3,6 +3,8 @@ const Auth = require('../Controllers/Auth')
 const validator = require('../utilles/Auth')
 const router = express.Router()
 const upload = require('../utilles/handelImages');
+var fs = require('fs');
+var path = require('path');
 
 
 router.route('/login/')

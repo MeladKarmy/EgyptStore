@@ -10,7 +10,7 @@ getAllProudcts = (req, res, next) => {
 
     //pagination
     let page = parseInt(req.query.page) || 1
-    let limit = parseInt(req.query.limit) || 5
+    let limit = parseInt(req.query.limit) || 15
     let skip = (page - 1) * limit
 
     // query filter 
@@ -40,14 +40,14 @@ getAllProudcts = (req, res, next) => {
     proudcts.find(JSON.parse(queryString),
         { _id: 0, __v: 0, slug: 0 }).skip(skip).limit(limit).populate({ path: 'category', select: 'name -_id' })
         .then((proudcts) => {
-            res.status(200).json({ data: proudcts })
+            res.status(200).json(proudcts)
         }).catch(err => next(err))
 }
 getProudctsById = (req, res, next) => {
     let proudctId = req.params.id
-    proudcts.find({ proudctId }).then((oneproudct) => {
-        if (!oneproudct) { throw new ErrorHandling(` ID : ${id}  not found `, 404) }
-        res.status(200).json({ data: oneproudct })
+    proudcts.findOne({ proudctId }).populate({ path: 'category', select: 'name' }).then((oneproudct) => {
+        if (!oneproudct) { res.json(` ID : ${id}  not found `, 404) }
+        res.status(200).json(oneproudct)
     }).catch(err => next(err))
 }
 createProudct = (req, res, next) => {
