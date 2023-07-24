@@ -20,6 +20,7 @@ export class ProudctService {
   }
   ctag = 'http://localhost:3030/proud'
   pro = 'http://localhost:3030/proudcts'
+  pro1 = 'http://localhost:3030/catagory'
 
   baseUrl = 'https://fakestoreapi.com/products'
   constructor(private http: HttpClient) { }
@@ -30,7 +31,7 @@ export class ProudctService {
 
   }
   getCatag(): Observable<any> {
-    return this.http.get<any>(this.ctag).pipe(catchError((err) => {
+    return this.http.get<any>(this.pro1).pipe(catchError((err) => {
       return throwError(() => err.message || "Server error")
     }))
 

@@ -1,17 +1,38 @@
-<section class="container my-5">
-    <h3 class="text-center">Welcom to LoGin</h3>
-    <form class="border rounded p-5" [formGroup]="LoginForm" novalidate (ngSubmit)="submit()">
-        <div class="form-group">
-        <label>Email address:</label>
-        <input type="email" class="form-control" [class.is-invalid]="Email ?.touched && Email ?.invalid && Email ?.pristine==false && Email?.dirty==true" formControlName="Email" >
+<section >
+    <div class="container ">
+        <div class="row ">
+            <div class="col-12 col-md-8 col-lg-5 mx-auto">
+                <div class="image mt-3">
+                    <img src="../../../../../assets/images/login.png" alt="login">
+                    <h3>Welcom to Egypt Store</h3>
+                </div>
+                <form class="p-2" [formGroup]="LoginForm" novalidate (ngSubmit)="submit()">
+                    <div class="form-group my-5">
+                        <label class="h6">Email address:</label>
+                        <input type="email" placeholder="email" class="form-control"
+                        [class.is-invalid]="Email ?.touched && Email ?.invalid && Email ?.pristine==false && Email?.dirty==true" 
+                        formControlName="email" >
+
+                        <div *ngIf="Email?.touched && Email ?.invalid">
+                            <small class="text-danger h6" *ngIf=" Email?.errors?.['required']">Email is Require.</small>
+                            <small class="text-danger h6" *ngIf=" Email?.errors?.['pattern']">Email Example EgyptStore@EgyptStore.com</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="h6">Password :</label>
+                        <input type="password" placeholder="password" class="form-control" 
+                        [class.is-invalid]="password ?.touched && password ?.invalid && password ?.pristine==false" formControlName="password" >
+                        <div *ngIf="password?.touched && password ?.invalid">
+                            <small class="text-danger h6" *ngIf=" password?.errors?.['required']">Password is Require.</small>
+                            <small class="text-danger h6" *ngIf="password?.errors?.['minlength']">Password must be more than 8.</small>
+                        </div>
+                    </div>
+                    <button type="submit"  class="h3 btn btn-primary my-5 col-12" [disabled]="LoginForm.invalid">Login</button>
+                </form>
+                <div>
+                    <a class="h5" mat-button routerLink="/register"><i class="fa-solid fa-right-to-bracket me-2"></i>Sign up ?</a>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-        <label>Password :</label>
-        <input type="password" class="form-control" [class.is-invalid]="Pass ?.touched && Pass ?.invalid && Pass ?.pristine==false" formControlName="password" >
-        </div>
-        <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
-        </div>
-        <button type="submit"  class="btn btn-primary m-3">Login</button>
-    </form>
+    </div>
 </section> 

@@ -1,6 +1,6 @@
 <div class="card m-auto mb-4">
   <div>
-    <img src="../../../../../assets/images/dress-shirt-img.png" class="card-img-top" [alt]="proudct.title" (click)="  goToProudct(proudct.proudctId)">
+    <img src="../../../../../assets/images/dress-shirt-img.png" class="card-img-top" [alt]="proudct.title" (click)="goToProudct(proudct.proudctId)">
   <div (click)="sendFav()">
     <i class="fa-regular fa-heart me-2" [@Fade] (click)="addToFavorite()" *ngIf="!proudct.fav" ></i>
   <i class="fa-solid fa-heart primary" [@Fade] (click)="addToFavorite()" *ngIf="proudct.fav"></i>
@@ -22,3 +22,50 @@
   </div>
   </div>
 </div>
+
+
+
+<!-- <main class="app">
+  <div class="card">
+    <div class="header">
+      <img src="../../../../../assets/images/dress-shirt-img.png" />
+      <div class="icon">
+        <i class="bx bx-heart icon"></i>
+      </div>
+    </div>
+    <div class="images">
+      <img class="baige active" src="../../../../../assets/images/dress-shirt-img.png" alt="image_card" />
+      <img class="blue" src="./images/blue.jpg" alt="image_card" />
+      <img class="black" src="./images/black.jpg" alt="image_card" />
+    </div>
+    <div class="details">
+      <h6 class="name">ADIDAS</h6>
+      <p>
+        Get laced up for training, sport and lifestyle with the latest
+        designs of men's shoes , sport and lifestyle with the latest
+      </p>
+      <div class="stars">
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+      </div>
+    </div>
+    <div class="price_color">
+      <div class="colors">
+        <div class="circles">
+          <span class="circle baige active" id="baige"></span>
+          <span class="circle blue" id="blue"></span>
+          <span class="circle black" id="black"></span>
+        </div>
+      </div>
+      <div class="price">
+        <h6>$13.00</h6>
+      </div>
+    </div>
+    <div class="button_parent">
+      <button>Add To Cart</button>
+    </div>
+  </div>
+</main> -->

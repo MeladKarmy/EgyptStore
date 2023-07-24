@@ -19,10 +19,13 @@
             <a class="nav-link"  routerLink="/proudcts">proudcts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  routerLink="login">login</a>
+            <a class="nav-link"  routerLink="login" *ngIf="!usersService.isLogin">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="register">register</a>
+            <a class="nav-link" routerLink="register" *ngIf="!usersService.isLogin">register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="usersService.logout()" *ngIf="usersService.isLogin" style="cursor: pointer">logout</a>
           </li>
           <li class="nav-item">
             <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -52,8 +55,8 @@
               <mat-icon matBadge={{productsActionService.favourits.length}} matBadgeColor="warn">thumb_up</mat-icon>
               <mat-menu #menuFav="matMenu" >
                 <div class="menu" >
-                  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" >
-                    <div class="example-box container" *ngFor="let product of productsActionService.favourits let i=index" cdkDrag>
+                  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="productsActionService.favourits.length" >
+                    <div class="example-box container" *ngFor="let product of productsActionService.favourits let i=index" cdkDrag >
                       <div class="row p-2">
                         <div class="col-12">
                           <mat-card class="example-card">
@@ -74,9 +77,13 @@
               </mat-menu>
             </button>
            </li>
+           <li class="nav-item ms-2" >
+            <p-chip [style]="{cursor: 'pointer'}" label={{usersService.user.value.name}} [image]="usersService.user.value.image" *ngIf="usersService.isLogin" ></p-chip>
+           </li>
         </ul>
       </div>
-    </div>
+    </div>    
   </nav>
                           
+
   

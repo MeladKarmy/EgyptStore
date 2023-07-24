@@ -7,6 +7,7 @@ import { ProudctsComponent } from './proudcts/proudcts/components/proudcts/proud
 import { ProudctDetailsComponent } from './proudcts/proudcts/components/proudct-details/proudct-details.component';
 import { RegisterComponent } from './Authuntication/auth/components/register/register.component';
 import { LoginComponent } from './Authuntication/auth/components/login/login.component';
+import { loginGuard } from './Authuntication/auth/guard/login.guard';
 
 const routes: Routes = [
 
@@ -14,8 +15,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'proudcts', component: ProudctsComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [loginGuard] },
   { path: 'singleProudct/:id', component: ProudctDetailsComponent },
 
 ];

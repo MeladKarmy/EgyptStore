@@ -18,6 +18,17 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { BrowserModule } from '@angular/platform-browser';
 import { PasswordModule } from 'primeng/password';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AvatarModule } from 'primeng/avatar';
+import { MatSelectModule } from '@angular/material/select';
+import { ChipModule } from 'primeng/chip';
+import { CarouselModule } from 'primeng/carousel';
+import { RatingModule } from 'primeng/rating';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -42,8 +53,17 @@ import { PasswordModule } from 'primeng/password';
     MatCardModule,
     DragDropModule,
     DataViewModule,
-    PasswordModule
-
+    PasswordModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    FileUploadModule,
+    ToastModule,
+    MatTabsModule,
+    AvatarModule,
+    MatSelectModule,
+    ChipModule,
+    CarouselModule,
+    RatingModule
 
   ], exports: [
     HeaderComponent,
@@ -59,7 +79,17 @@ import { PasswordModule } from 'primeng/password';
     DragDropModule,
     DataViewModule,
     DataViewLayoutOptions,
-    PasswordModule
+    PasswordModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    FileUploadModule,
+    ToastModule,
+    MatTabsModule,
+    AvatarModule,
+    MatSelectModule,
+    ChipModule,
+    CarouselModule,
+    RatingModule
 
   ]
 })

@@ -6,7 +6,7 @@ export interface IUsers {
     email: String
     gender: String
     password: String
-    status: Boolean
+    status?: Boolean
     comments?:
     {
         proudctId: Number

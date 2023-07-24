@@ -27,9 +27,12 @@ export class ProductCardComponent {
     this.proudct.fav ? this.proudct.fav = false : this.proudct.fav = true
   }
   getProudctsInFav() {
-    let x = JSON.parse(localStorage.getItem('fav')!)
-    for (let i = 0; i < x.length; i++) {
-      x[i].proudctId == this.proudct.proudctId ? this.proudct.fav = true : ''
+    if ('fav' in localStorage) {
+      let x = JSON.parse(localStorage.getItem('fav')!)
+      for (let i = 0; i < x.length; i++) {
+        x[i].proudctId == this.proudct.proudctId ? this.proudct.fav = true : ''
+      }
+
     }
   }
   addToCart() {

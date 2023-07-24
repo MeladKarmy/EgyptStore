@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
 import { IProudct } from '../interface/proudctInterface';
+import { ProudctService } from './proudct.service';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsActionService {
-
-  constructor() { }
+  // favourits = new BehaviorSubject<IProudct[]>([JSON.parse(localStorage.getItem('fav')!)])
   favourits: IProudct[] = []
   cart: IProudct[] = []
-  countCart: number = this.cart.length
-  countFav: number = this.favourits.length
+
+
+  constructor() {
+    // ('fav' in localStorage) ? this.favourits = JSON.parse(localStorage.getItem('fav')!) : this.favourits = [] 
+
+    this.favourits = JSON.parse(localStorage.getItem('fav')!)
+    if (this.favourits == null) this.favourits = []
+    this.cart = JSON.parse(localStorage.getItem('cart')!)
+    if (this.cart == null) this.cart = []
+  }
   productFav(event: IProudct) {
     if ('fav' in localStorage) {
       this.favourits = JSON.parse(localStorage.getItem('fav')!)
@@ -26,9 +36,6 @@ export class ProductsActionService {
       this.favourits.push(event)
       localStorage.setItem('fav', JSON.stringify(this.favourits))
     }
-    console.log(this.cart)
-    console.log(this.favourits)
-
   }
 
   productCart(event: IProudct) {
@@ -47,8 +54,20 @@ export class ProductsActionService {
       this.cart.push(event)
       localStorage.setItem('cart', JSON.stringify(this.cart))
     }
-    console.log(this.cart)
-    console.log(this.favourits)
+
   }
+  // getProudcts() {
+  //   this.productsService.getAllProudcts().subscribe({
+  //     next: data => this.proudcts = data,
+  //     error: err => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: err.error.msg,
+  //       })
+  //     }
+  //   })
+  // }
+
+
 
 }

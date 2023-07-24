@@ -1,0 +1,48 @@
+section {
+    background: url(../../../../../assets/images/nordwood-themes-_sg8nXmpWDM-unsplash.jpg);
+
+    div.row {
+
+        div.col-12 {
+            padding: 2rem;
+            border-radius: 2rem;
+            background-color: rgb(49, 136, 136);
+            margin: auto;
+            color: white;
+
+            div.image {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+
+                img {
+                    position: absolute;
+                    width: 150px;
+                    display: block;
+                    top: 0%;
+                    left: 50%;
+                    transform: translate(-50%, -70%);
+                }
+
+                h3 {
+
+                    font-size: 1.5rem;
+                    color: white;
+                    text-align: center;
+                    margin-top: 4rem;
+                }
+            }
+
+            form {
+                input {
+                    font-size: large;
+                }
+            }
+        }
+
+        a {
+            color: white;
+        }
+    }
+
+}

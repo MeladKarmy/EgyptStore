@@ -1,73 +1,75 @@
-.example-card {
-    max-width: 400px;
-}
+section {
+    div.container {
+        div.row {
+            color: rgb(19, 146, 125);
 
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-}
+            div.image {
+                text-align: center;
+                margin: auto;
 
-.single-product-img img {
-    height: 500px;
-    border-radius: 5px;
+                // img {
+                //     margin: auto;
+                //     border-radius: 2rem;
+                //     display: block;
+                //     width: 100%;
+                //     height: 100%;
 
-    box-shadow: 0 0 20px #ddd;
-}
+                // }
+            }
 
-.single-product-content h3 {
-    font-size: 22px;
-    font-weight: 600;
-}
+            div.details {
+                padding: 2rem;
 
-p.single-product-pricing span {
-    font-size: 18px;
-    display: block;
-    opacity: 0.8;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
+                div.header {
+                    font-size: 2rem;
+                    display: flex;
+                    justify-content: space-between;
+                }
 
-.rating {
-    font-size: 1.9rem;
-    color: #ffc107;
-}
+                h2 {
+                    font-size: 2rem;
+                    margin: 4rem 0 0;
+                    font-weight: 600;
+                }
 
-.name {
+                h4 {
+                    margin-bottom: 3rem;
+                    margin-left: 1.5rem;
+                    color: rgb(180, 178, 178);
+                }
 
-    border-radius: 50px;
-    padding: 4px 10px;
-    background-color: #F28123;
-    color: white;
-    font-size: bold;
+                div.price {
+                    margin: 4rem 0 1rem;
+                    padding: 0;
+                    display: flex;
 
-    height: 500px;
-    border-radius: 5px;
+                    h4:first-child {
+                        color: rgb(255, 145, 0);
+                        font-size: 2rem;
+                        font-weight: 600;
+                    }
 
-    box-shadow: 0 0 20px #ddd;
-}
+                    h4:nth-child(2) {
+                        text-decoration: line-through;
+                        color: rgb(27, 112, 101);
+                        font-size: 2rem;
+                        font-weight: 600;
+                        margin-left: 8rem;
+                    }
+                }
 
-.single-product-content h3 {
-    font-size: 22px;
-    font-weight: 600;
-}
+                .btn {
+                    background-color: rgb(13, 116, 116);
+                    font-size: 1.5rem;
 
-p.single-product-pricing span {
-    font-size: 18px;
-    display: block;
-    opacity: 0.8;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
+                    &:hover {
+                        transform: scale(1.2);
+                    }
+                }
 
-.rating {
-    font-size: 1.9rem;
-    color: #ffc107;
-}
+            }
 
-.next {
-    filter: invert(1);
-}
+        }
 
-.prev {
-    filter: invert(1);
+    }
 }

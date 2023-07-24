@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from 'src/app/share/shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HandelReqestInterceptor } from './intercepter/handel-reqest.interceptor';
 
 
 @NgModule({
@@ -21,6 +23,14 @@ import { SharedModule } from 'src/app/share/shared/shared.module';
     SharedModule
 
   ],
+  providers:
+    [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HandelReqestInterceptor,
+        multi: true
+      }
+    ]
 
 })
 export class AuthModule { }
